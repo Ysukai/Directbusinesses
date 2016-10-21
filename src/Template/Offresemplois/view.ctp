@@ -1,14 +1,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Liste des offres d'emplois'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('Liste des offres d\'emplois'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Postuler'), ['action' => 'add']) ?> </li>
-        <li><?php if($this->offresemplois->isOwnedBy($id, $user['id'])) {   
-                echo $this->Form->postLink(__('Supprimer cette offre d'emploi'), ['action' => 'delete', $offresemplois->id], ['confirm' => __('Are you sure you want to delete # {0}?', $offresemplois->id)])  . '</li><li>';
-                echo $this->Html->link(__('Modifier cette offre d'emploi'), ['action' => 'edit', $offresemplois->id]) . '</li><li>';
-            }
-        ?></li>
-
     </ul>
 </nav>
 <div class="offresemplois view large-9 medium-8 columns content">
