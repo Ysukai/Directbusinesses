@@ -9,9 +9,10 @@
     <fieldset>
         <legend><?= __('Add User') ?></legend>
         <?php
+        echo $this->Form->input('username');
             echo $this->Form->input('password');
-            echo $this->Form->input('role');
-            echo $this->Form->input('username');
+            echo $this->Form->input('role', ['options' => ['user' => 'Utilisateur', 'entreprise' => 'Entreprise']]);
+            
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

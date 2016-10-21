@@ -122,4 +122,13 @@ class UsersController extends AppController
             $this->Flash->error(__('Username ou mot de passe invalide, essayer encore'));
         }
     }
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->Auth->allow(['add']);
+        parent::beforeFilter($event);
+    }
+    public function isAuthorized($user) {
+        return true;
+        
+    }
+    
 }
