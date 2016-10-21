@@ -20,7 +20,7 @@ class UsersController extends AppController
     {
         $users = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
+        $this->set(compact('users'), $this->Users->find('all'));
         $this->set('_serialize', ['users']);
     }
 
@@ -123,11 +123,10 @@ class UsersController extends AppController
         }
     }
     public function beforeFilter(\Cake\Event\Event $event) {
-        $this->Auth->allow(['add']);
         parent::beforeFilter($event);
     }
     public function isAuthorized($user) {
-        return true;
+        return parent::isAuthorized($user);
         
     }
     

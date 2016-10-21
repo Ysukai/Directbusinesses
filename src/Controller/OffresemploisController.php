@@ -129,7 +129,19 @@ class OffresemploisController extends AppController
             if($this->request->action === 'add'){
                 $ok = true;
             }
+            if(in_array($this->request->action, ['edit', 'delete'])){
+                $offreId = (int)  $this->request->param['pass'][0];
+                if($this->Offresemplois->isOwnedBy($offreId, $user['id'])){
+                    $ok = true;
+                }
+            }
         }
         return $ok;
+    }
+    public function isOwnedBy($offreId, $userId){
+        return $this->exists(['id' => $offreId, 'user_id' => $userId]);
+    }
+    public function postuler($user){
+        
     }
 }

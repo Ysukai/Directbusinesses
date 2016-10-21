@@ -33,6 +33,7 @@ class OffresemploisTable extends Table
         $this->table('offresemplois');
         $this->displayField('id');
         $this->primaryKey('id');
+
     }
 
     /**
@@ -104,6 +105,7 @@ class OffresemploisTable extends Table
             ->date('datedebut')
             ->requirePresence('datedebut', 'create')
             ->notEmpty('datedebut');
+        
 
         return $validator;
     }
