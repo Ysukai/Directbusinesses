@@ -108,4 +108,26 @@ class OffresemploisController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->Auth->allow(['index']);
+        parent::beforeFilter($event);
+    }
+    public function isAuthorized($user) {
+        
+        $ok = false;
+        if(parent::isAdmin($user)){
+            $ok = true;
+        }
+        if(parent::isUser($user)){
+            if($this->request->action === 'view'){
+                $ok = true;
+            }
+        }
+        if(parent::isEntreprise($user)){
+            if($this->request->action === 'add'){
+                $ok = true;
+            }
+        }
+        return $ok;
+    }
 }
