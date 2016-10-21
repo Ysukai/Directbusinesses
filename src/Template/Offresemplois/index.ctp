@@ -9,20 +9,18 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Titre') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('creation') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('scolarite') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('secteuractivite') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('metier') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('datedebut') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Date de création') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Scolarité') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Secteur dactivité') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Métier') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Date de début') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($offresemplois as $offresemplois): ?>
             <tr>
-                <td><?= $this->Number->format($offresemplois->id) ?></td>
                 <td><?= h($offresemplois->Titre) ?></td>
                 <td><?= h($offresemplois->creation) ?></td>
                 <td><?= h($offresemplois->scolarite) ?></td>
@@ -31,8 +29,7 @@
                 <td><?= h($offresemplois->datedebut) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $offresemplois->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $offresemplois->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $offresemplois->id], ['confirm' => __('Are you sure you want to delete # {0}?', $offresemplois->id)]) ?>
+                    <?= $this->Html->link(__('Postuler'), ['action' => 'edit', $offresemplois->id]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
