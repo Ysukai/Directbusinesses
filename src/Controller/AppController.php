@@ -85,4 +85,15 @@ class AppController extends Controller
         }
         return false;
     }
+    public function isUser($user){
+        if(isset($user['role']) && $user['role'] === 'user'){
+            return true;
+        }
+        return false;
+    }
+    public function isEntreprise($user){
+        if(isset($user['role']) && $user['role'] === 'entreprise'){
+            return true;
+        }
+    }
 }
