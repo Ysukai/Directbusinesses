@@ -141,7 +141,4 @@ class OffresemploisController extends AppController
     public function isOwnedBy($offreId, $userId){
         return $this->exists(['id' => $offreId, 'user_id' => $userId]);
     }
-    public function postuler($user){
-        
-    }
 }
