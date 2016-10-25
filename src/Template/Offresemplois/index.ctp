@@ -29,7 +29,7 @@
                 <td><?= h($offresemplois->datedebut) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $offresemplois->id]) ?>
-                    <?= $this->Html->link(__('Postuler'), ['action' => 'edit', $offresemplois->id]) ?>
+                    <?= $this->Html->link(__('Postuler'), ['controller' => 'offreusers', 'action' => 'postuler', $offresemplois->id]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

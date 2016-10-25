@@ -27,8 +27,8 @@
             <td><?= $this->Number->format($offreuser->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Offresempoi Id') ?></th>
-            <td><?= $this->Number->format($offreuser->offresempoi_id) ?></td>
+            <th scope="row"><?= __('Offresemploi Id') ?></th>
+            <td><?= $this->Number->format($offreuser->offresemploi_id) ?></td>
         </tr>
     </table>
 </div>

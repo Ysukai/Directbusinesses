@@ -9,11 +9,11 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $user_id
  * @property int $file_id
- * @property int $offresempoi_id
+ * @property int $offresemploi_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\File $file
- * @property \App\Model\Entity\Offresempois $offresempois
+ * @property \App\Model\Entity\Offresemplois $offresemplois
  */
 class Offreuser extends Entity
 {

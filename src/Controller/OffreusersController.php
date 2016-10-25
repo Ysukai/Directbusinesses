@@ -19,7 +19,7 @@ class OffreusersController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'Files', 'Offresempois']
+            'contain' => ['Users', 'Files', 'Offresemplois']
         ];
         $offreusers = $this->paginate($this->Offreusers);
 
@@ -37,7 +37,7 @@ class OffreusersController extends AppController
     public function view($id = null)
     {
         $offreuser = $this->Offreusers->get($id, [
-            'contain' => ['Users', 'Files', 'Offresempois']
+            'contain' => ['Users', 'Files', 'Offresemplois']
         ]);
 
         $this->set('offreuser', $offreuser);
@@ -64,8 +64,8 @@ class OffreusersController extends AppController
         }
         $users = $this->Offreusers->Users->find('list', ['limit' => 200]);
         $files = $this->Offreusers->Files->find('list', ['limit' => 200]);
-        $offresempois = $this->Offreusers->Offresempois->find('list', ['limit' => 200]);
-        $this->set(compact('offreuser', 'users', 'files', 'offresempois'));
+        $offresemplois = $this->Offreusers->Offresemplois->find('list', ['limit' => 200]);
+        $this->set(compact('offreuser', 'users', 'files', 'offresemplois'));
         $this->set('_serialize', ['offreuser']);
     }
 
@@ -93,8 +93,8 @@ class OffreusersController extends AppController
         }
         $users = $this->Offreusers->Users->find('list', ['limit' => 200]);
         $files = $this->Offreusers->Files->find('list', ['limit' => 200]);
-        $offresempois = $this->Offreusers->Offresempois->find('list', ['limit' => 200]);
-        $this->set(compact('offreuser', 'users', 'files', 'offresempois'));
+        $offresemplois = $this->Offreusers->Offresemplois->find('list', ['limit' => 200]);
+        $this->set(compact('offreuser', 'users', 'files', 'offresemplois'));
         $this->set('_serialize', ['offreuser']);
     }
 
@@ -116,5 +116,34 @@ class OffreusersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    public function postuler($id = null){
+        
+        $offreuser = $this->Offreusers->newEntity();
+        if ($this->request->is('post')) {
+            $offreuser = $this->Offreusers->patchEntity($offreuser, $this->request->data);
+            if ($this->Offreusers->save($offreuser)) {
+                $this->Flash->success(__('The offreuser has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The offreuser could not be saved. Please, try again.'));
+            }
+        }
+        $users = $this->Offreusers->Users->find('list', ['limit' => 200]);
+        $files = $this->Offreusers->Files->find('list', ['limit' => 200]);
+        $offresemplois = $this->Offreusers->Offresemplois->find('list', ['limit' => 200]);
+        $this->set(compact('offreuser', 'users', 'files', 'offresemplois'));
+        $this->set('_serialize', ['offreuser']);
+    }
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->Auth->allow('postuler');
+        parent::beforeFilter($event);
+    }
+    public function isAuthorized($user) {
+        if(parent::isUser($user)){
+            return true;
+        }
+        return parent::isAuthorized($user);
     }
 }

@@ -21,7 +21,7 @@
         <?php
             echo $this->Form->input('user_id', ['options' => $users]);
             echo $this->Form->input('file_id', ['options' => $files]);
-            echo $this->Form->input('offresempoi_id');
+            echo $this->Form->input('offresemploi_id');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

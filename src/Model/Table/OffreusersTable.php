@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Files
- * @property \Cake\ORM\Association\BelongsTo $Offresempois
+ * @property \Cake\ORM\Association\BelongsTo $Offresemplois
  *
  * @method \App\Model\Entity\Offreuser get($primaryKey, $options = [])
  * @method \App\Model\Entity\Offreuser newEntity($data = null, array $options = [])
@@ -46,8 +46,8 @@ class OffreusersTable extends Table
             'foreignKey' => 'file_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Offresempois', [
-            'foreignKey' => 'offresempoi_id',
+        $this->belongsTo('Offresemplois', [
+            'foreignKey' => 'offresemploi_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -78,7 +78,7 @@ class OffreusersTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['file_id'], 'Files'));
-        $rules->add($rules->existsIn(['offresempoi_id'], 'Offresempois'));
+        $rules->add($rules->existsIn(['offresemploi_id'], 'Offresemplois'));
 
         return $rules;
     }
