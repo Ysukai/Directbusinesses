@@ -38,4 +38,7 @@ class Offresemplois extends Entity
         '*' => true,
         'id' => false
     ];
+    public function isOwnedBy($offreId, $userId){
+        return $this->exists(['id' => $offreId, 'user_id' => $userId]);
+    }
 }

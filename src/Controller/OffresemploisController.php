@@ -19,8 +19,8 @@ class OffresemploisController extends AppController
     public function index()
     {
         $offresemplois = $this->paginate($this->Offresemplois);
-
-        $this->set(compact('offresemplois'));
+        $userId = $this->Auth->user('id');
+        $this->set(compact('offresemplois', 'userId'));
         $this->set('_serialize', ['offresemplois']);
     }
 
@@ -51,6 +51,7 @@ class OffresemploisController extends AppController
         $offresemplois = $this->Offresemplois->newEntity();
         if ($this->request->is('post')) {
             $offresemplois = $this->Offresemplois->patchEntity($offresemplois, $this->request->data);
+            $offresemplois->user_id = $this->Auth->user('id');
             if ($this->Offresemplois->save($offresemplois)) {
                 $this->Flash->success(__('The offresemplois has been saved.'));
 
@@ -138,7 +139,5 @@ class OffresemploisController extends AppController
         }
         return $ok;
     }
-    public function isOwnedBy($offreId, $userId){
-        return $this->exists(['id' => $offreId, 'user_id' => $userId]);
-    }
+    
 }

@@ -30,6 +30,10 @@
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $offresemplois->id]) ?>
                     <?= $this->Html->link(__('Postuler'), ['controller' => 'offreusers', 'action' => 'postuler', $offresemplois->id]) ?>
+                    <?php if($users->id == $userId):?>
+                    <?= $this->Html->link(__('Edit'),['action' => 'edit',$offresemplois->id]) ?>
+                    <?= $this->Html->link(__('Delete'),['action' => 'delete',$offresemplois->id]) ?>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

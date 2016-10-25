@@ -33,6 +33,11 @@ class OffresemploisTable extends Table
         $this->table('offresemplois');
         $this->displayField('id');
         $this->primaryKey('id');
+        
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
+        ]);
 
     }
 
@@ -105,6 +110,7 @@ class OffresemploisTable extends Table
             ->date('datedebut')
             ->requirePresence('datedebut', 'create')
             ->notEmpty('datedebut');
+        
         
 
         return $validator;

@@ -3,6 +3,7 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Liste des offres d\'emplois'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Postuler'), ['action' => 'add']) ?> </li>
+        <li></li>
     </ul>
 </nav>
 <div class="offresemplois view large-9 medium-8 columns content">
