@@ -42,11 +42,11 @@ use Cake\Routing\Route\DashedRoute;
  *
  */
 Router::defaultRouteClass(DashedRoute::class);
-Router::connect(
-    '/offresemplois/:id',
-    ['controller' => 'Offresemplois', 'action' => 'edit'],
-    ['id' => '\d+', 'pass' => ['id']]
-);
+//Router::connect(
+//    '/offresemplois/:id',
+//    ['controller' => 'Offresemplois', 'action' => 'edit'],
+//    ['id' => '\d+', 'pass' => ['id']]
+//);
 Router::scope('/', function (RouteBuilder $routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',

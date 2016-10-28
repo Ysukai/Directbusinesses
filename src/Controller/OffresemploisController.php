@@ -113,35 +113,33 @@ class OffresemploisController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
     public function beforeFilter(\Cake\Event\Event $event) {
         $this->Auth->allow(['index', 'view']);
         parent::beforeFilter($event);
 }
     
     public function isAuthorized($user) {
-        
-        $ok = false;
         if(parent::isAdmin($user)){
-            $ok = true;
+                return true;
+            } 
+        if ($this->request->action === 'add') {
+            if(parent::isEntreprise($user)){
+                return true;
+            }
+            
         }
-        if(parent::isUser($user)){
-            if($this->request->action === 'view'){
-                $ok = true;
+        
+        if ($this->request->action === 'view') {
+            return true;
+        }
+
+        if (in_array($this->request->action, ['edit', 'delete'])) {
+            $id = (int)$this->request->params['pass'][0];
+            if ($this->Offresemplois->isOwnedBy($id, $user['id'])) {
+                return true;
             }
         }
-        if(parent::isEntreprise($user)){
-            if($this->request->action === 'add'){
-                $ok = true;
-            }
-            if(in_array($this->request->action, ['edit', 'delete'])){
-                $offreId = (int)  $this->request->param['pass'][0];
-                if($this->Offresemplois->isOwnedBy($offreId, $user['id'])){
-                    $ok = true;
-                }
-            }
-        }
-        return $ok;
+        return parent::isAuthorized($user);
     }
     
 }

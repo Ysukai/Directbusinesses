@@ -31,6 +31,7 @@
                 <td><?= $offresemplois->has('user') ? $this->Html->link($offresemplois->user->username, ['controller' => 'Users', 'action' => 'view', $offresemplois->user->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $offresemplois->id]) ?>
+                    <?= $this->Html->link(__('Publier'), ['controller' => 'Offreusers', 'action' => 'add']) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $offresemplois->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $offresemplois->id], ['confirm' => __('Are you sure you want to delete # {0}?', $offresemplois->id)]) ?>
                 </td>

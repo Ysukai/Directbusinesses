@@ -49,7 +49,7 @@ class OffreusersController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
         $offreuser = $this->Offreusers->newEntity();
         if ($this->request->is('post')) {
@@ -105,39 +105,7 @@ class OffreusersController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $offreuser = $this->Offreusers->get($id);
-        if ($this->Offreusers->delete($offreuser)) {
-            $this->Flash->success(__('The offreuser has been deleted.'));
-        } else {
-            $this->Flash->error(__('The offreuser could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
-    public function postuler($id = null){
-        
-        $offreuser = $this->Offreusers->newEntity();
-        if ($this->request->is('post')) {
-            $offreuser = $this->Offreusers->patchEntity($offreuser, $this->request->data);
-            if ($this->Offreusers->save($offreuser)) {
-                $this->Flash->success(__('The offreuser has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The offreuser could not be saved. Please, try again.'));
-            }
-        }
-        $users = $this->Offreusers->Users->find('list', ['limit' => 200]);
-        $files = $this->Offreusers->Files->find('list', ['limit' => 200]);
-        $offresemplois = $this->Offreusers->Offresemplois->find('list', ['limit' => 200]);
-        $this->set(compact('offreuser', 'users', 'files', 'offresemplois'));
-        $this->set('_serialize', ['offreuser']);
-    }
     public function beforeFilter(\Cake\Event\Event $event) {
-        $this->Auth->allow('postuler');
         parent::beforeFilter($event);
     }
     public function isAuthorized($user) {
