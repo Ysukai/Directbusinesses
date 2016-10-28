@@ -123,10 +123,15 @@ class UsersController extends AppController
         }
     }
     public function beforeFilter(\Cake\Event\Event $event) {
-        $this->Auth->allow('add', 'login', 'logout');
+        
         parent::beforeFilter($event);
+        $this->Auth->allow(['add', 'login', 'logout']);
     }
     public function isAuthorized($user) {
+        
+        if (parent::isAdmin($user)) {
+            return true;
+        }
         return parent::isAuthorized($user);
         
     }

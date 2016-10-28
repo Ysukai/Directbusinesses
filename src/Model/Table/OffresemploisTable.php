@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Offresemplois Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ *
  * @method \App\Model\Entity\Offresemplois get($primaryKey, $options = [])
  * @method \App\Model\Entity\Offresemplois newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Offresemplois[] newEntities(array $data, array $options = [])
@@ -33,7 +35,7 @@ class OffresemploisTable extends Table
         $this->table('offresemplois');
         $this->displayField('id');
         $this->primaryKey('id');
-        
+
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
@@ -110,9 +112,24 @@ class OffresemploisTable extends Table
             ->date('datedebut')
             ->requirePresence('datedebut', 'create')
             ->notEmpty('datedebut');
-        
-        
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+
+        return $rules;
+    }
+    public function isOwnedBy($offreId, $userId){
+        return $this->exists(['id' => $offreId, 'user_id' => $userId]);
     }
 }

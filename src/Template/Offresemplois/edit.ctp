@@ -29,6 +29,7 @@
             echo $this->Form->input('poste');
             echo $this->Form->input('situation');
             echo $this->Form->input('datedebut');
+            echo $this->Form->input('user_id', ['options' => $users]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -14,7 +14,7 @@
  */
 
 $cakeDescription = 'CakePHP: the rapid development php framework';
-?>
+?> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,8 +46,21 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
               
             </ul>
             <ul class="right">
-                <li><?= $this->Html->Link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
-                <li><?= $this->Html->Link(__('Inscription'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+                <li><?php if($this->request->session()->read('Auth.User')){
+                        $name = $this->request->session()->read('Auth.User.username');
+                        echo$this->Html->Link($name, ['controller' => 'Users', 'action' => 'view']);
+                    }else{
+                        echo $this->Html->Link(__('Login'), ['controller' => 'Users', 'action' => 'login']);
+                    }
+                ?>
+                </li>
+                <li>
+                    <?php if($this->request->session()->read('Auth.User')){
+                            echo $this->Html->Link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']);
+                        }else{
+                            echo $this->Html->Link(__('Inscription'), ['controller' => 'Users', 'action' => 'add']);
+                        }
+                ?></li>
             </ul>
         </div>
     </nav>

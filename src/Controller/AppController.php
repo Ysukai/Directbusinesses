@@ -71,6 +71,10 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
+    public function beforeFilter(Event $event) {
+        return false;
+    }
+
     public function isAuthorized($user){
         if(AppController::isAdmin($user)){
             return true;

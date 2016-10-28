@@ -18,9 +18,12 @@ class OffresemploisController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Users']
+        ];
         $offresemplois = $this->paginate($this->Offresemplois);
-        $userId = $this->Auth->user('id');
-        $this->set(compact('offresemplois', 'userId'));
+
+        $this->set(compact('offresemplois'));
         $this->set('_serialize', ['offresemplois']);
     }
 
@@ -34,7 +37,7 @@ class OffresemploisController extends AppController
     public function view($id = null)
     {
         $offresemplois = $this->Offresemplois->get($id, [
-            'contain' => []
+            'contain' => ['Users']
         ]);
 
         $this->set('offresemplois', $offresemplois);
@@ -51,7 +54,6 @@ class OffresemploisController extends AppController
         $offresemplois = $this->Offresemplois->newEntity();
         if ($this->request->is('post')) {
             $offresemplois = $this->Offresemplois->patchEntity($offresemplois, $this->request->data);
-            $offresemplois->user_id = $this->Auth->user('id');
             if ($this->Offresemplois->save($offresemplois)) {
                 $this->Flash->success(__('The offresemplois has been saved.'));
 
@@ -60,7 +62,8 @@ class OffresemploisController extends AppController
                 $this->Flash->error(__('The offresemplois could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('offresemplois'));
+        $users = $this->Offresemplois->Users->find('list', ['limit' => 200]);
+        $this->set(compact('offresemplois', 'users'));
         $this->set('_serialize', ['offresemplois']);
     }
 
@@ -86,7 +89,8 @@ class OffresemploisController extends AppController
                 $this->Flash->error(__('The offresemplois could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('offresemplois'));
+        $users = $this->Offresemplois->Users->find('list', ['limit' => 200]);
+        $this->set(compact('offresemplois', 'users'));
         $this->set('_serialize', ['offresemplois']);
     }
 
@@ -111,9 +115,9 @@ class OffresemploisController extends AppController
     }
     
     public function beforeFilter(\Cake\Event\Event $event) {
-        $this->Auth->allow(['index']);
+        $this->Auth->allow(['index', 'view']);
         parent::beforeFilter($event);
-    }
+}
     
     public function isAuthorized($user) {
         

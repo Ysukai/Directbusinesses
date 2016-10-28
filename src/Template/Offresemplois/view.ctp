@@ -1,9 +1,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Liste des offres d\'emplois'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Postuler'), ['action' => 'add']) ?> </li>
-        <li></li>
+        <li><?= $this->Html->link(__('List Offresemplois'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Offresemplois'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="offresemplois view large-9 medium-8 columns content">
@@ -14,16 +13,24 @@
             <td><?= h($offresemplois->Titre) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Scolarité') ?></th>
+            <th scope="row"><?= __('Scolarite') ?></th>
             <td><?= h($offresemplois->scolarite) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Secteur dactivité') ?></th>
+            <th scope="row"><?= __('Secteuractivite') ?></th>
             <td><?= h($offresemplois->secteuractivite) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Métier') ?></th>
+            <th scope="row"><?= __('Metier') ?></th>
             <td><?= h($offresemplois->metier) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $offresemplois->has('user') ? $this->Html->link($offresemplois->user->username, ['controller' => 'Users', 'action' => 'view', $offresemplois->user->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Creation') ?></th>
+            <td><?= h($offresemplois->creation) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Datedebut') ?></th>

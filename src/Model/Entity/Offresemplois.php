@@ -21,6 +21,9 @@ use Cake\ORM\Entity;
  * @property string $poste
  * @property string $situation
  * @property \Cake\I18n\Time $datedebut
+ * @property int $user_id
+ *
+ * @property \App\Model\Entity\User $user
  */
 class Offresemplois extends Entity
 {
@@ -38,7 +41,5 @@ class Offresemplois extends Entity
         '*' => true,
         'id' => false
     ];
-    public function isOwnedBy($offreId, $userId){
-        return $this->exists(['id' => $offreId, 'user_id' => $userId]);
-    }
+    
 }
