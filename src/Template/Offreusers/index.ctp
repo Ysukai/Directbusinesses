@@ -13,7 +13,6 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('file_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('offresemploi_id') ?></th>
@@ -23,10 +22,9 @@
         <tbody>
             <?php foreach ($offreusers as $offreuser): ?>
             <tr>
-                <td><?= $this->Number->format($offreuser->id) ?></td>
-                <td><?= $offreuser->has('user') ? $this->Html->link($offreuser->user->id, ['controller' => 'Users', 'action' => 'view', $offreuser->user->id]) : '' ?></td>
+                <td><?= $offreuser->has('user') ? $this->Html->link($offreuser->user->username, ['controller' => 'Users', 'action' => 'view', $offreuser->user->id]) : '' ?></td>
                 <td><?= $offreuser->has('file') ? $this->Html->link($offreuser->file->name, ['controller' => 'Files', 'action' => 'view', $offreuser->file->id]) : '' ?></td>
-                <td><?= $this->Number->format($offreuser->offresemploi_id) ?></td>
+                <td><?= $offreuser->has('offresemplois') ? $this->Html->link($offreuser->offresemplois->Titre, ['controller' => 'OffresEmplois', 'action' => 'view', $offreuser->offresemplois->id]): '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $offreuser->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $offreuser->id]) ?>

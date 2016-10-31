@@ -20,6 +20,7 @@
         </thead>
         <tbody>
             <?php foreach ($offresemplois as $offresemplois): ?>
+            <?php if($this->request->session()->read('Auth.User.id') === $offresemplois->user_id): ?>
             <tr>
                 <td><?= h($offresemplois->Titre) ?></td>
                 <td><?= h($offresemplois->scolarite) ?></td>
@@ -30,19 +31,18 @@
                 <td class="actions">
                     
                     <?= $this->Html->link(__('View'), ['action' => 'view', $offresemplois->id]) ?>
-                    <?php if($this->request->session()->read('Auth.User.role') === 'user' || $this->request->session()->read('Auth.User.role') === 'admin'):?>
+                    <?php if($this->request->session()->read('Auth.User')):?>
                     <?= $this->Html->link(__('Publier'), ['controller' => 'Offreusers', 'action' => 'add', $offresemplois->id]) ?>
-                    <?php endif; ?>
+                    <?php endif;?>
                     <?php $idUser = $this->request->session()->read('Auth.User') ;
                     if($idUser['id'] === $offresemplois->user_id || $idUser['role'] === 'admin'):?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $offresemplois->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $offresemplois->id], ['confirm' => __('Are you sure you want to delete # {0}?', $offresemplois->id)]) ?>
-                    <?php endif; ?>
-                    <?php if($this->request->session()->read('Auth.User.role') === 'entreprise' || $this->request->session()->read('Auth.User.role') === 'admin'): ?>
-                    <?= $this->Html->link(__('Voir les postulants'), ['controller' => 'Offreusers', 'action' => 'index']); ?>
+                    
                     <?php endif; ?>
                 </td>
             </tr>
+            <?php endif; ?>
             <?php endforeach; ?>
         </tbody>
     </table>
@@ -55,3 +55,4 @@
         <p><?= $this->Paginator->counter() ?></p>
     </div>
 </div>
+

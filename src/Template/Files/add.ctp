@@ -5,15 +5,17 @@
     </ul>
 </nav>
 <div class="files form large-9 medium-8 columns content">
-    <?= $this->Form->create($file) ?>
     <fieldset>
         <legend><?= __('Add File') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('path');
-            echo $this->Form->input('status');
-        ?>
+        <h1>Upload File</h1>
+        <div class="content">
+        <?= $this->Flash->render() ?>
+            <div class="upload-frm">
+                <?php echo $this->Form->create($uploadData, ['type' => 'file']); ?>
+                    <?php echo $this->Form->input('file', ['type' => 'file', 'class' => 'form-control']); ?>
+                    <?php echo $this->Form->button(__('Upload File'), ['type'=>'submit', 'class' => 'form-controlbtn btn-default']); ?>
+                <?php echo $this->Form->end(); ?>
+            </div>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
 </div>

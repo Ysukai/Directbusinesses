@@ -18,11 +18,12 @@ class FilesFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'created' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'id' => ['type' => 'integer', 'length' => 55, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'id' => ['type' => 'integer', 'length' => 5, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'modified' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'name' => ['type' => 'string', 'length' => 55, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'path' => ['type' => 'string', 'length' => 55, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'status' => ['type' => 'string', 'length' => 55, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'user_id' => ['type' => 'integer', 'length' => 5, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -40,12 +41,13 @@ class FilesFixture extends TestFixture
      */
     public $records = [
         [
-            'created' => '2016-10-14',
+            'created' => '2016-10-28',
             'id' => 1,
-            'modified' => '2016-10-14',
+            'modified' => '2016-10-28',
             'name' => 'Lorem ipsum dolor sit amet',
             'path' => 'Lorem ipsum dolor sit amet',
-            'status' => 'Lorem ipsum dolor sit amet'
+            'status' => 'Lorem ipsum dolor sit amet',
+            'user_id' => 1
         ],
     ];
 }

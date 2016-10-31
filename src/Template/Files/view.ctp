@@ -2,9 +2,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit File'), ['action' => 'edit', $file->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete File'), ['action' => 'delete', $file->id], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Files'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New File'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="files view large-9 medium-8 columns content">
@@ -15,16 +12,12 @@
             <td><?= h($file->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Path') ?></th>
-            <td><?= h($file->path) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Status') ?></th>
-            <td><?= h($file->status) ?></td>
+            <td><?= h($file->status_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($file->id) ?></td>
+            <th scope="row"><?= __('Username') ?></th>
+            <td><?= h($file->user->username) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -35,4 +28,5 @@
             <td><?= h($file->modified) ?></td>
         </tr>
     </table>
+    <?= $this->Html->link(__('Download CV'), ['action' => 'send', 'id' => $file->id]) ?>
 </div>

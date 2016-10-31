@@ -40,6 +40,9 @@ class OffresemploisTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('Offreusers', [
+           'foreignKey' => 'offresemploi_id' 
+        ]);
 
     }
 

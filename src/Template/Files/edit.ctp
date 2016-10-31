@@ -15,9 +15,9 @@
     <fieldset>
         <legend><?= __('Edit File') ?></legend>
         <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('path');
-            echo $this->Form->input('status');
+        $options = ['true' => 'Visible', 'false' => 'Caché'];
+            echo $this->Form->input('status_id', array('label' => 'Visibilité', 'type' => 'select', 'options' => $options));
+            //echo $this->Form->select('status_id', $options, ['escape' => false]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

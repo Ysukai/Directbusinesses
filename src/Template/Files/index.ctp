@@ -10,10 +10,8 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('path') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -21,17 +19,17 @@
         <tbody>
             <?php foreach ($files as $file): ?>
             <tr>
+                <?php if($this->request->session()->read('Auth.User.id') === $file->user_id || $this->request->session()->read('Auth.User.role') === 'admin'): ?>
                 <td><?= h($file->created) ?></td>
-                <td><?= $this->Number->format($file->id) ?></td>
                 <td><?= h($file->modified) ?></td>
                 <td><?= h($file->name) ?></td>
-                <td><?= h($file->path) ?></td>
-                <td><?= h($file->status) ?></td>
+                <td><?= h($file->status->name) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $file->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $file->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $file->id], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id)]) ?>
                 </td>
+                <?php endif; ?>
             </tr>
             <?php endforeach; ?>
         </tbody>

@@ -42,9 +42,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </ul>
         <div class="top-bar-section">
             <ul class="left">
-                <li><?= $this->Html->Link(__('Offre d\'emploie'), ['controller' => 'Offresemplois', 'action' => 'index']) ?></li>
-              
-            </ul>
+                <li><?= $this->Html->Link(__('Offre d\'emploi'), ['controller' => 'Offresemplois', 'action' => 'index']) ?></li>
+                
+                
+                <?php if($this->request->session()->read('Auth.User.role') === 'user' || $this->request->session()->read('Auth.User.role') === 'admin'){
+                    echo '<li>' . $this->Html->Link(__('Voir mes cv'), ['controller' => 'Files', 'action' => 'index']) . '</li>';
+                    echo '<li>' . $this->Html->Link(__('Voir mes postulations'), ['controller' => 'Offresemplois', 'action' => 'viewPost']) . '</li>';
+                            
+                } ?>
+                <?php if($this->request->session()->read('Auth.User.role') === 'entreprise' || $this->request->session()->read('Auth.User.role') === 'admin'){
+                    
+                    echo '<li>' . $this->Html->Link(__('Voir mes offres'), ['controller' => 'Offresemplois', 'action' => 'viewOwned']) . '</li>';
+                }?>
+             </ul>
             <ul class="right">
                 <li><?php if($this->request->session()->read('Auth.User')){
                         $name = $this->request->session()->read('Auth.User.username');

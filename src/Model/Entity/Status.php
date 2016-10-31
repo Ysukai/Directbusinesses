@@ -3,18 +3,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
-/**
- * File Entity
- *
- * @property \Cake\I18n\Time $created
- * @property int $id
- * @property \Cake\I18n\Time $modified
- * @property string $name
- * @property string $path
- * @property string $status
- * @property int $user_id
- */
-class File extends Entity
+class Status extends Entity
 {
 
     /**
@@ -31,3 +20,4 @@ class File extends Entity
         'id' => false
     ];
 }
+

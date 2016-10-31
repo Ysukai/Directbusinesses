@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Files Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\HasMany $Offreusers
+ *
  * @method \App\Model\Entity\File get($primaryKey, $options = [])
  * @method \App\Model\Entity\File newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\File[] newEntities(array $data, array $options = [])
@@ -37,6 +40,18 @@ class FilesTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Offreusers', [
+            'foreignKey' => 'file_id'
+        ]);
+        $this->belongsTo('Status', [
+            'foreignKey' => 'status_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -58,11 +73,25 @@ class FilesTable extends Table
         $validator
             ->requirePresence('path', 'create')
             ->notEmpty('path');
-
-        $validator
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
+        
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+
+        return $rules;
+    }
+    public function isOwnedBy($fileId, $userId){
+        return $this->exists(['id' => $fileId, 'user_id' => $userId]);
     }
 }

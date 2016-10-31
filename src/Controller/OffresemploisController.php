@@ -43,7 +43,28 @@ class OffresemploisController extends AppController
         $this->set('offresemplois', $offresemplois);
         $this->set('_serialize', ['offresemplois']);
     }
+    public function viewPost(){
+    
+        $this->paginate = [
+            'contain' => ['Users', 'Offreusers']
+        ];
+        $offresemplois = $this->paginate($this->Offresemplois);
 
+        $this->set(compact('offresemplois'));
+        $this->set('_serialize', ['offresemplois']);
+        
+    }
+
+    public function viewOwned(){
+        $this->paginate = [
+            'contain' => ['Users']
+        ];
+        $offresemplois = $this->paginate($this->Offresemplois);
+
+        $this->set(compact('offresemplois'));
+        $this->set('_serialize', ['offresemplois']);
+        
+    }
     /**
      * Add method
      *
@@ -116,19 +137,23 @@ class OffresemploisController extends AppController
     public function beforeFilter(\Cake\Event\Event $event) {
         $this->Auth->allow(['index', 'view']);
         parent::beforeFilter($event);
-}
+    }
     
     public function isAuthorized($user) {
         if(parent::isAdmin($user)){
                 return true;
             } 
-        if ($this->request->action === 'add') {
+        if (in_array($this->request->action, ['add', 'viewOwned'])) {
             if(parent::isEntreprise($user)){
                 return true;
             }
             
         }
-        
+        if (in_array($this->request->action, ['viewPost'])){
+            if(parent::isUser($user)){
+                return true;
+            }
+        }
         if ($this->request->action === 'view') {
             return true;
         }
