@@ -20,6 +20,7 @@
         </thead>
         <tbody>
             <?php foreach ($offresemplois as $offresemplois): ?>
+            <?php debug($offresemplois->offreusers); die();  ?>
             <?php if($this->request->session()->read('Auth.User.id') === $offresemplois->offreusers->user_id): ?>
             <tr>
                 <td><?= h($offresemplois->Titre) ?></td>

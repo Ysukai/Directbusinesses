@@ -51,12 +51,20 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-                $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'Offresemplois','action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            if($user['role'] === 'entreprise'){
+                if ($this->Users->save($user)) {
+                    $this->loadModel('Entreprises');
+                    $entreprise = $this->Entreprises->newEntity();
+                    $entreprise->user_id = $user['id'];
+                    $this->Entreprises->save($entreprise);
+                    $this->Flash->success(__('The user has been saved.'));
+                    $this->Auth->setUser($user);
+                    return $this->redirect(['controller' => 'Offresemplois','action' => 'index']);
+                } else {
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                }
+            }else if($user['role'] === 'user'){
+                
             }
         }
         $this->set(compact('user'));

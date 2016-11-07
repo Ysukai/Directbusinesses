@@ -43,6 +43,7 @@ class OffresemploisTable extends Table
         $this->hasMany('Offreusers', [
            'foreignKey' => 'offresemploi_id' 
         ]);
+        
 
     }
 

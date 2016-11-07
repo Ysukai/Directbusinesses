@@ -180,15 +180,24 @@ return [
         'default' => [
             'className' => 'Mail',
             // The following keys are used in SMTP transports
-            'host' => 'localhost',
-            'port' => 25,
+            'host' => 'ssl://a2plcpnl0791.prod.iad2.secureserver.net',
+            'port' => 993,
             'timeout' => 30,
-            'username' => 'user',
-            'password' => 'secret',
+            'username' => 'ysukai@directbusinesses.com',
+            'password' => 'Momdadsis1222!',
             'client' => null,
             'tls' => null,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
+        'directbusinesses' => [
+            'host' => 'a2plcpnl0791.prod.iad2.secureserver.net ',
+            'port' => '465',
+            'user' => 'ysukai@directbusinesses.com',
+            'password' => 'Momdadsis1222!',
+            'className' => 'smtp'
+            
+        ],
+
     ],
 
     /**
@@ -202,8 +211,8 @@ return [
      */
     'Email' => [
         'default' => [
-            'transport' => 'default',
-            'from' => 'you@localhost',
+            'transport' => 'directbusinesses',
+            'from' => 'ysukai@directbusinesses.com',
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],

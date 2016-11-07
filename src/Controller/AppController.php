@@ -65,6 +65,16 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+        $this->loadModel('Entreprises');
+        if($this->request->session()->read('Auth.User.role') === 'entreprise' ){
+            $profil = $this->Entreprises->find('all', ['conditions' => ['user_id' => $this->request->session()->read('Auth.User.id')]])->first();
+            $this->set('profil_id', isset($profil['id']) ? $profil['id'] : -1);
+        }else if($this->request->session()->read('Auth.User.role') === 'user'){
+            
+//            $profil = $this->Candidats->find('all', ['conditions' => ['user_id' => $this->request->session()->read('Auth.User.id')]])->first();
+//            
+//            $this->set('profil_id', isset($profil['id']) ? $profil['id'] : -1);
+        }
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {

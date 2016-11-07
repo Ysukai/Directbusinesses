@@ -58,7 +58,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <ul class="right">
                 <li><?php if($this->request->session()->read('Auth.User')){
                         $name = $this->request->session()->read('Auth.User.username');
-                        echo$this->Html->Link($name, ['controller' => 'Users', 'action' => 'view']);
+                        if($this->request->session()->read('Auth.User.role') === 'entreprise'){
+                            echo$this->Html->Link($name, ['controller' => 'Entreprises', 'action' => 'view', $profil_id]);
+                        }else{
+                            echo$this->Html->Link($name, ['controller' => 'Candidats', 'action' => 'view', $profil_id]);
+                        }
                     }else{
                         echo $this->Html->Link(__('Login'), ['controller' => 'Users', 'action' => 'login']);
                     }
